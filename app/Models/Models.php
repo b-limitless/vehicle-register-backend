@@ -13,6 +13,7 @@ class Models extends Model
      * one model can have many vehicle
      */
     protected $table = "models";
+    protected $fillable = ['name', 'seat_count', 'fuel'];
 
     public function vehicles()
     {

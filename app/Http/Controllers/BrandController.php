@@ -14,18 +14,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
         return Brand::all();
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
     }
 
     /**
@@ -56,6 +45,7 @@ class BrandController extends Controller
     public function update(Request $request, $id)
     {
         $rules = array('name' => 'required|max:255');
+
         $validator = Validator::make($request->all(), $rules);
 
         if($validator->fails()) {
@@ -63,6 +53,7 @@ class BrandController extends Controller
         }
 
         $brand = Brand::find($id);
+
         $brand->update($request->all());
 
         return $brand;

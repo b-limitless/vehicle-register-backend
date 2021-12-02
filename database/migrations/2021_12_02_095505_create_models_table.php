@@ -15,6 +15,7 @@ class CreateModelsTable extends Migration
     {
         Schema::create('models', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->integer('seat_count');
             $table->enum('fuel', array('Gasoline', 'Diesel', 'El', 'Hybrid'));
             $table->timestamps();

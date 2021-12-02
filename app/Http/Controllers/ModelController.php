@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Models;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ModelController extends Controller
 {
@@ -13,17 +14,7 @@ class ModelController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Models::all();
     }
 
     /**
@@ -34,7 +25,17 @@ class ModelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'name' => 'required|max:255', 
+            'seat_count' => 'required|numeric|max:50|min:1',
+            'fuel'=>'in:Gasoline,Gasoline,El,Hybrid'
+        );
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()) {
+            return $validator->errors();
+        }
+        return Models::create($request->all());
     }
 
     /**
@@ -49,17 +50,6 @@ class ModelController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -68,7 +58,22 @@ class ModelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'name' => 'required|max:255', 
+            'seat_count' => 'required|numeric|max:50|min:1',
+            'fuel'=>'in:Gasoline,Gasoline,El,Hybrid'
+        );
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()) {
+            return $validator->errors();
+        }
+
+        $model = Models::find($id);
+
+        $model->update($request->all());
+
+        return $model;
     }
 
     /**
@@ -77,8 +82,8 @@ class ModelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Models $model)
     {
-        //
+        $model->delete();  
     }
 }
