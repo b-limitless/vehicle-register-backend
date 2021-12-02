@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\BrandController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 // // CRUD Operation route for Brands
 // Route::post('/brand', [BrandController::class, 'login']);
-// Route::get('/brand', [BrandController::class, 'login']);
+Route::get('/brand', [BrandController::class, 'index']);
 // Route::put('/brand', [BrandController::class, 'login']);
 // Route::delete('/brand', [BrandController::class, 'login']);
 

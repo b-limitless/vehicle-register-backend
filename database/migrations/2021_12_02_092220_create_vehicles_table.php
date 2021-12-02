@@ -14,14 +14,16 @@ class CreateVehiclesTable extends Migration
     public function up()
     {
         Schema::create('vehicles', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->increments('id');
             $table->string('licence_number');
-            $table->string('model');
-            $table->string('production_year');
-            $table->string('mileage');
-            $table->string('date_of_registration');
-            $table->string('veteran');
+            $table->bigInteger('model_id')->unsigned();
+            $table->date('production_year');
+            $table->integer('mileage');
+            $table->date('date_of_registration');
+            $table->enum('veteran', array('yes', 'no'));
+            $table->string('brand');
+            $table->timestamps();
+            //$table->foreign('model_id')->references('id')->on('models');
         });
     }
 
@@ -32,6 +34,7 @@ class CreateVehiclesTable extends Migration
      */
     public function down()
     {
+       
         Schema::dropIfExists('vehicles');
     }
 }
