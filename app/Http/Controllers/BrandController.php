@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BrandController extends Controller
 {
@@ -24,7 +25,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -35,29 +36,14 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $rules = array('name' => 'required|max:255');
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        $validator = Validator::make($request->all(), $rules);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        if($validator->fails()) {
+            return $validator->errors();
+        }
+        return Brand::create($request->all());
     }
 
     /**
@@ -69,7 +55,18 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array('name' => 'required|max:255');
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()) {
+            return $validator->errors();
+        }
+
+        $brand = Brand::find($id);
+        $brand->update($request->all());
+
+        return $brand;
+
     }
 
     /**
@@ -78,8 +75,8 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Brand $brand)
     {
-        //
+        $brand->delete();        
     }
 }

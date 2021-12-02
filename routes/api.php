@@ -20,10 +20,12 @@ use Illuminate\Support\Facades\Route;
 // Route::delete('/vehicle', [VehicleController::class, 'login']);
 
 // // CRUD Operation route for Brands
-// Route::post('/brand', [BrandController::class, 'login']);
+Route::resource('brand', BrandController::class);
+
+Route::post('/brand', [BrandController::class, 'store']);
 Route::get('/brand', [BrandController::class, 'index']);
-// Route::put('/brand', [BrandController::class, 'login']);
-// Route::delete('/brand', [BrandController::class, 'login']);
+Route::put('/brand', [BrandController::class, 'update']);
+Route::delete('/brand', [BrandController::class, 'destroy']);
 
 // // CRUD Operation route for Models
 // Route::post('/model', [ModelController::class, 'login']);
