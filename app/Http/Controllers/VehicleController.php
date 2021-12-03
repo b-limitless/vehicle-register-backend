@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Vehicle;
+use Illuminate\Support\Facades\DB;
 
 class VehicleController extends Controller
 {
@@ -13,7 +14,11 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        return Vehicle::all();
+        $vehicle = DB::table('vehicles')
+        ->join('models', 'vehicles.model_id', '=', 'models.id')
+        ->get();
+        //return Vehicle::all();
+        return $vehicle;
     }
 
     /**
