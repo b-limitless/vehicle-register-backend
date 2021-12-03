@@ -1,8 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use App\Models\Vehicle;
 
 class VehicleController extends Controller
 {
@@ -13,17 +13,7 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Vehicle::all();
     }
 
     /**
@@ -34,7 +24,22 @@ class VehicleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'licence_number' => 'required|max:25|min:2', 
+            'model_id' => 'required|numeric|max:500',
+            'production_year' => 'required',
+            'mileage' => 'required|numeric|min:1',
+            'date_of_registration' => 'required',
+            'veteran' => 'in:yes,no',
+            'brand' => 'required|numeric|min:1|max:50000',
+            
+        );
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()) {
+            return $validator->errors();
+        }
+        return Vehicle::create($request->all());
     }
 
     /**
@@ -48,16 +53,6 @@ class VehicleController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -68,7 +63,28 @@ class VehicleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'licence_number' => 'required|max:25|min:2', 
+            'model_id' => 'required|numeric|max:500',
+            'production_year' => 'required',
+            'mileage' => 'required|numeric|min:1',
+            'date_of_registration' => 'required',
+            'veteran' => 'in:yes,no',
+            'brand' => 'required|numeric|min:1|max:50000',
+            
+        );
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()) {
+            return $validator->errors();
+        }
+
+        $vehicle = Vehicle::find($id);
+
+        $vehicle->update($request->all());
+
+        return $vehicle;
     }
 
     /**
@@ -77,8 +93,8 @@ class VehicleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Vehicle $vehicle)
     {
-        //
+        $vehicle->delete();
     }
 }

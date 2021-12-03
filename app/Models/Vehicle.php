@@ -12,6 +12,16 @@ class Vehicle extends Model
      * Get the model associated with the vehicle.
      */
     protected $table = "vehicles";
+    protected $fillable = [ 
+                           'licence_number', 
+                           'model_id', 
+                           'production_year',
+                           'mileage', 
+                           'date_of_registration',
+                           'veteran',
+                           'brand'
+                           
+                        ];
 
     public function models()
     {

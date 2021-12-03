@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ModelController;
+use App\Http\Controllers\VehicleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,16 +15,11 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-// CRUD Operation route for  vehicle
-// Route::post('/vehicle', [VehicleController::class, 'register']);
-// Route::get('/vehicle', [VehicleController::class, 'login']);
-// Route::put('/vehicle', [VehicleController::class, 'login']);
-// Route::delete('/vehicle', [VehicleController::class, 'login']);
 
-// // CRUD Operation route for Brands
+// All controller is added as resource to execute as CRUD Operation
 Route::resource('brand', BrandController::class);
 Route::resource('model', ModelController::class);
-
+Route::resource('vehicle', VehicleController::class);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
