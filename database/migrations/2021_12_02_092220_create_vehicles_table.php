@@ -11,10 +11,17 @@ class CreateVehiclesTable extends Migration
      *
      * @return void
      */
+
     public function up()
     {
         Schema::create('vehicles', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('title');
+            $table->integer('price');
+            $table->string('image_url')->nullable();
+            $table->integer('persons');
+            $table->integer('doors');
+            $table->integer('liters_per_km');
             $table->string('licence_number');
             $table->bigInteger('model_id')->unsigned();
             $table->date('production_year');

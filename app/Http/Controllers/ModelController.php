@@ -28,7 +28,7 @@ class ModelController extends Controller
         $rules = array(
             'name' => 'required|max:255', 
             'seat_count' => 'required|numeric|max:50|min:1',
-            'fuel'=>'in:Gasoline,Gasoline,El,Hybrid'
+            'fuel'=>'in:Gasoline,Diesel,El,Hybrid'
         );
         $validator = Validator::make($request->all(), $rules);
 
