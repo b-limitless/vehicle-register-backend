@@ -30,7 +30,7 @@ class CreateVehiclesTable extends Migration
             $table->date('date_of_registration');
             $table->enum('veteran', array('yes', 'no'));
             $table->integer('brand');
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
             $table->timestamps();
             //$table->foreign('model_id')->references('id')->on('models');
         });

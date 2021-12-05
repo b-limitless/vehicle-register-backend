@@ -170,7 +170,12 @@ class VehicleController extends Controller
      *  Test for to add foreign key
      * **/
 
-     public function AddForeignKey() {
-        DB::select('ALTER TABLE vehicles ADD FOREIGN KEY IF NOT EXISTS (model_id) REFERENCES models(id) ON DELETE CASCADE');
+     public function AddForeignKeys() {
+        return DB::select(
+                    'ALTER TABLE vehicles 
+                    ADD FOREIGN KEY (model_id) REFERENCES models(id),
+                    ADD FOREIGN KEY (brand) REFERENCES brands(id)
+                    ON DELETE CASCADE'
+                  );
      }
 }
