@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\Vehicle;
 use App\Models\Models;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class VehicleController extends Controller
 {
@@ -56,7 +57,7 @@ class VehicleController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if($validator->fails()) {
-            return $validator->errors();
+            return response()->json(['errors' => $validator->errors()], 400);
         }
 
         $vehicle = new Vehicle();
@@ -123,7 +124,7 @@ class VehicleController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if($validator->fails()) {
-            return $validator->errors();
+            return response()->json(['errors' => $validator->errors()], 400);
         }
 
         $vehicle = Vehicle::find($id);
