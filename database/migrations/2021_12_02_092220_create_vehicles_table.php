@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateVehiclesTable extends Migration
 {
@@ -28,11 +29,12 @@ class CreateVehiclesTable extends Migration
             $table->integer('mileage');
             $table->date('date_of_registration');
             $table->enum('veteran', array('yes', 'no'));
-            $table->string('brand');
+            $table->integer('brand');
             $table->string('description')->nullable();
             $table->timestamps();
             //$table->foreign('model_id')->references('id')->on('models');
         });
+
     }
 
     /**
@@ -42,7 +44,6 @@ class CreateVehiclesTable extends Migration
      */
     public function down()
     {
-       
         Schema::dropIfExists('vehicles');
     }
 }

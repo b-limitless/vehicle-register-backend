@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Vehicle;
 use App\Models\Models;
+use App\Models\Brand;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
@@ -19,13 +20,18 @@ class VehicleController extends Controller
         // Fetch the vehicle and inner join models and vehicle tables
         $vehicle = DB::table('vehicles')
         ->join('models', 'vehicles.model_id', '=', 'models.id')
-        ->select('vehicles.*', 'models.name')
+        ->join('brands', 'vehicles.brand', '=', 'brands.id')
+        ->select('vehicles.*', 'models.name', 'brands.name as brandName')
         ->get();
 
         // Fetch the models 
         $models = Models::all();
 
-        return ["vehicles" => $vehicle, "models" => $models];        
+        // Fetch brand
+        $brands = Brand::all();
+
+        return ["vehicles" => $vehicle, "models" => $models, "brands" => $brands];     
+        
     }
 
     /**
@@ -159,4 +165,12 @@ class VehicleController extends Controller
     {
         $vehicle->delete();
     }
+
+    /**
+     *  Test for to add foreign key
+     * **/
+
+     public function AddForeignKey() {
+        DB::select('ALTER TABLE vehicles ADD FOREIGN KEY IF NOT EXISTS (model_id) REFERENCES models(id) ON DELETE CASCADE');
+     }
 }
