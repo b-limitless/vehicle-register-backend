@@ -24,7 +24,7 @@ class CreateVehiclesTable extends Migration
             $table->integer('doors');
             $table->integer('liters_per_km');
             $table->string('licence_number');
-            $table->bigInteger('model_id')->unsigned();
+            $table->integer('model_id')->unsigned();
             $table->date('production_year');
             $table->integer('mileage');
             $table->date('date_of_registration');
@@ -32,9 +32,16 @@ class CreateVehiclesTable extends Migration
             $table->integer('brand');
             $table->longText('description')->nullable();
             $table->timestamps();
-            //$table->foreign('model_id')->references('id')->on('models');
+            //$table->foreign('model_id')->references('id')->on('models')->onDelete('cascade');
         });
 
+        Schema::table('vehicles', function (Blueprint $table) {
+            $table->foreign('model_id')->references('id')->on('models')->onDelete('cascade');
+        });
+
+        Schema::table('vehicles', function (Blueprint $table) {
+            $table->foreign('brand')->references('id')->on('brands')->onDelete('cascade');
+        });
     }
 
     /**
