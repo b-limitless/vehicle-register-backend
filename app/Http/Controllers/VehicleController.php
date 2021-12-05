@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Vehicle;
+use App\Models\Models;
 use Illuminate\Support\Facades\DB;
 
 class VehicleController extends Controller
@@ -14,10 +15,16 @@ class VehicleController extends Controller
      */
     public function index()
     {
+        // Fetch the vehicle and inner join models and vehicle tables
         $vehicle = DB::table('vehicles')
         ->join('models', 'vehicles.model_id', '=', 'models.id')
+        ->select('vehicles.*', 'models.name')
         ->get();
-        return $vehicle;        
+
+        // Fetch the models 
+        $models = Models::all();
+
+        return ["vehicles" => $vehicle, "models" => $models];        
     }
 
     /**
@@ -66,6 +73,7 @@ class VehicleController extends Controller
         $vehicle->date_of_registration = $request->date_of_registration;
         $vehicle->veteran = $request->veteran;
         $vehicle->brand = $request->brand;
+        $vehicle->description = $request->description;
         
         $vehicle->save();
         
@@ -133,6 +141,7 @@ class VehicleController extends Controller
         $vehicle->date_of_registration = $request->date_of_registration;
         $vehicle->veteran = $request->veteran;
         $vehicle->brand = $request->brand;
+        $vehicle->description = $request->description;
 
         $vehicle->update();
 
