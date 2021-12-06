@@ -17,8 +17,13 @@ class CreateModelsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('seat_count');
+            $table->integer('brand_id')->unsigned();
             $table->enum('fuel', array('Gasoline', 'Diesel', 'El', 'Hybrid'));
             $table->timestamps();
+        });
+
+        Schema::table('models', function (Blueprint $table) {
+            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
         });
     }
 

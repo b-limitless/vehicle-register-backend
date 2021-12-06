@@ -20,7 +20,7 @@ class VehicleController extends Controller
         // Fetch the vehicle and inner join models and vehicle tables
         $vehicle = DB::table('vehicles')
         ->join('models', 'vehicles.model_id', '=', 'models.id')
-        ->join('brands', 'vehicles.brand', '=', 'brands.id')
+        ->join('brands', 'brands.id', '=', 'models.brand_id')
         ->select('vehicles.*', 'models.name', 'brands.name as brandName')
         ->get();
 

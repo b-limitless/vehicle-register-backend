@@ -32,7 +32,6 @@ class CreateVehiclesTable extends Migration
             $table->integer('brand');
             $table->longText('description')->nullable();
             $table->timestamps();
-            //$table->foreign('model_id')->references('id')->on('models')->onDelete('cascade');
         });
 
         Schema::table('vehicles', function (Blueprint $table) {
