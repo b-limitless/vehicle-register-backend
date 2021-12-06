@@ -9,6 +9,7 @@
 
 ## Requirements 
 This project is using laravel version 8 therefore please check the requirements the run this project
+- (https://laravel.com/docs/8.x/installation)
 
 ## ENV Update
 Please change the environment variable for the MySQL or MariaDB, while developing PostGres SQL was used and it should work for both MariaDB and MySQL and database settings
