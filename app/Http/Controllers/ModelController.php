@@ -26,7 +26,6 @@ class ModelController extends Controller
         $brands = Brand::all();
 
         return ['brands' => $brands, 'models' => $models];
-        //return Models::all();
     }
 
     /**
@@ -43,6 +42,7 @@ class ModelController extends Controller
             'brand_id'=>'required|numeric',
             'fuel'=>'in:Gasoline,Diesel,El,Hybrid'
         );
+
         $validator = Validator::make($request->all(), $rules);
 
         if($validator->fails()) {
@@ -61,17 +61,6 @@ class ModelController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -86,6 +75,7 @@ class ModelController extends Controller
             'brand_id'=>'required|numeric',
             'fuel'=>'in:Gasoline,Gasoline,El,Hybrid'
         );
+
         $validator = Validator::make($request->all(), $rules);
 
         if($validator->fails()) {

@@ -17,14 +17,14 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        // Fetch the vehicle and inner join models and vehicle tables
+        // Fetch the vehicles and inner join vehicles, models and brands
         $vehicle = DB::table('vehicles')
         ->join('models', 'vehicles.model_id', '=', 'models.id')
         ->join('brands', 'brands.id', '=', 'models.brand_id')
         ->select('vehicles.*', 'models.name', 'brands.name as brandName')
         ->get();
 
-        // Fetch the models 
+        // Fetch models 
         $models = Models::all();
 
         // Fetch brand
@@ -87,19 +87,6 @@ class VehicleController extends Controller
         return $vehicle;
         
     }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
 
     /**
      * Update the specified resource in storage.
@@ -165,17 +152,4 @@ class VehicleController extends Controller
     {
         $vehicle->delete();
     }
-
-    /**
-     *  Test for to add foreign key
-     * **/
-
-     public function AddForeignKeys() {
-        return DB::select(
-                    'ALTER TABLE vehicles 
-                    ADD FOREIGN KEY (model_id) REFERENCES models(id),
-                    ADD FOREIGN KEY (brand) REFERENCES brands(id)
-                    ON DELETE CASCADE'
-                  );
-     }
 }
