@@ -7,6 +7,18 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Requirements 
+This project is using laravel version 8 therefore please check the requirements the run this project
+
+## ENV Update
+Please change the environment variable for the MySQL or MariaDB, while developing PostGres SQL was used and it should work for both MariaDB and MySQL and database settings
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=database
+DB_USERNAME=root
+DB_PASSWORD=
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
