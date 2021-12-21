@@ -79,7 +79,7 @@ class ModelController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if($validator->fails()) {
-            return $validator->errors();
+            return response()->json(['errors' => $validator->errors()], 400);
         }
 
         $model = Models::find($id);
